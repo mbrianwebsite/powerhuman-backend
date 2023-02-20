@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/company', [CompanyController::class, 'all']);
+
+Route::post('login', [UserController::class, 'login']);
