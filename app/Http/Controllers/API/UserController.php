@@ -41,6 +41,7 @@ class UserController extends Controller
             return ResponseFormatter::error($e->getMessage());
         }
     }
+
     public function register(Request $request)
     {
         try {
@@ -71,5 +72,14 @@ class UserController extends Controller
             // Return error response
             return ResponseFormatter::error($error->getMessage());
         }
+    }
+
+    public function logout(Request $request)
+    {
+        // Revoke Token
+        $token = $request->user()->currentAccessToken()->delete();
+
+        // Return response
+        return ResponseFormatter::success($token, 'Logout success');
     }
 }
