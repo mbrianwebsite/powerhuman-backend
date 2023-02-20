@@ -82,4 +82,13 @@ class UserController extends Controller
         // Return response
         return ResponseFormatter::success($token, 'Logout success');
     }
+
+    public function fetch(Request $request)
+    {
+        // Get user
+        $user = $request->user();
+
+        // Return response
+        return ResponseFormatter::success($user, 'Fetch success');
+    }
 }
