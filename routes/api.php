@@ -19,13 +19,10 @@ use App\Http\Controllers\API\CompanyController;
 //     return $request->user();
 // });
 
-Route::group([
-    'prefix' => 'company',
-    'middleware' => 'auth:sanctum'
-], function () {
+Route::prefix('company')->middleware('auth:sanctum')->name('company.')->group(function () {
     Route::get('', [CompanyController::class, 'fetch'])->name('fetch');
     Route::post('', [CompanyController::class, 'create'])->name('create');
-    Route::put('', [CompanyController::class, 'update'])->name('update');
+    Route::post('update/{id}', [CompanyController::class, 'update'])->name('update');
 });
 
 
