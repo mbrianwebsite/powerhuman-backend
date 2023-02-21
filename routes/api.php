@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\CompanyController;
@@ -16,12 +15,19 @@ use App\Http\Controllers\API\CompanyController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group([
+    'prefix' => 'company',
+    'middleware' => 'auth:sanctum'
+], function () {
+    Route::get('', [CompanyController::class, 'fetch'])->name('fetch');
+    Route::post('', [CompanyController::class, 'create'])->name('create');
+    Route::put('', [CompanyController::class, 'update'])->name('update');
 });
 
-Route::get('/company', [CompanyController::class, 'all']);
-Route::post('company', [CompanyController::class, 'create'])->middleware('auth:sanctum');
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
