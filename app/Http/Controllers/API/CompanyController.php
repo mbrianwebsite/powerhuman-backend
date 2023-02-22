@@ -6,7 +6,6 @@ use Exception;
 use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use GuzzleHttp\Psr7\Response;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +14,6 @@ use App\Http\Requests\UpdateCompanyRequest;
 
 class CompanyController extends Controller
 {
-    // /api/company?id=1
     public function fetch(Request $request)
     {
         $id = $request->input('id');
@@ -50,10 +48,10 @@ class CompanyController extends Controller
         );
     }
 
-
     public function create(CreateCompanyRequest $request)
     {
         try {
+            // Upload logo
             if ($request->hasFile('logo')) {
                 $path = $request->file('logo')->store('public/logos');
             }
